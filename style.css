@@ -1,72 +1,99 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: Helvetica, sans-serif;
     box-sizing: border-box;
 }
 
-body{
+body {
     background: #952323;
     color: #F2E8C6;
-}
-
-.container{
-    margin: 12%;
-    width: 90%;
-    max-width: 700px;
-}
-
-.display{
-    width: 100%;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    background: #F2E8C6;
-    color: #272829;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 26px 20px;
-    border-radius: 5px;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.container h1{
+.container {
+    width: 90%;
+    max-width: 700px;
+    background: #F2E8C6;
+    color: #272829;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container h1 {
     font-weight: 500;
-    font-size: 45px;
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
-.container h1 span{
+.container h1 span {
     color: #FFBB5C;
     border-bottom: 4px solid #FFBB5C;
     padding-bottom: 7px;
 }
 
-.display input{
-    border: 0;
-    outline: 0;
+.display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.display input {
+    border: none;
+    outline: none;
     font-size: 24px;
-    flex-grow: 1; /* Allows the input to grow and fill the available space */
-    min-width: 0; /* Ensures that the input can shrink if necessary */
-    background: transparent; /* Makes the input background transparent */
-    color: #272829; /* Sets the text color */
+    flex-grow: 1;
+    padding: 5px;
 }
 
-
-.container button img{
-    width: 28px;
-    margin-right: 10px;
-}
-
-.container button{
+.container button {
     border: 0;
     outline: 0;
     background: #FFBB5C;
     color: #fff;
-    font-size: 22px;
-    font-weight: 300;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 26px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 20px auto; /* Center the button vertically */
+    transition: background-color 0.2s ease;
+}
+
+.container button img {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.container button:hover {
+    background-color: #FFA03F;
+}
+
+.options {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.options label {
+    font-weight: bold;
+}
+
+.options input[type="checkbox"],
+.options input[type="radio"] {
+    margin-right: 10px;
 }

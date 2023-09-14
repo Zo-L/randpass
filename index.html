@@ -11,34 +11,73 @@
         <h1>Generate a<br><span>Random Password</span></h1>
         <div class="display">
             <input type="text" id="password" placeholder="Password">
-            <img src="images/copy.png" alt="copy-icon" onclick="copyPassword()">
+            <img src="images/copy.png" onclick="copyPassword()" alt="copy-icon">
         </div>
-        <button onclick="generateRandomPassword()"><img src="images/refresh.png" alt="">Go</button>
+        <button><img src="images/refresh.png" alt="">Generate</button>
+        <div class="options">
+            <div class="length-slider">
+                <label for="length">Password Length: <span id="lengthValue">12</span></label>
+                <input type="range" id="length" min="14" max="100" step="1" value="12">
+            </div>
+            <div class="complexity-options">
+                <label>Character Types:</label>
+                <input type="checkbox" id="uppercase" checked> Uppercase
+                <input type="checkbox" id="lowercase" checked> Lowercase
+                <input type="checkbox" id="numbers" checked> Numbers
+                <input type="checkbox" id="symbols" checked> Symbols
+            </div>
+        </div>
     </div>
     <script>
         const passwordBox = document.getElementById("password");
-        const minLength = 14;
-        const maxLength = 100;
+        const lengthSlider = document.getElementById("length");
+        const lengthValue = document.getElementById("lengthValue");
+        const uppercaseCheckbox = document.getElementById("uppercase");
+        const lowercaseCheckbox = document.getElementById("lowercase");
+        const numbersCheckbox = document.getElementById("numbers");
+        const symbolsCheckbox = document.getElementById("symbols");
 
         function generateRandomPassword() {
-            const passwordLength = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
-            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+            const length = lengthSlider.value;
+            const useUppercase = uppercaseCheckbox.checked;
+            const useLowercase = lowercaseCheckbox.checked;
+            const useNumbers = numbersCheckbox.checked;
+            const useSymbols = symbolsCheckbox.checked;
+
+            // Define character sets based on user options
+            let charset = "";
+            if (useUppercase) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (useLowercase) charset += "abcdefghijklmnopqrstuvwxyz";
+            if (useNumbers) charset += "0123456789";
+            if (useSymbols) charset += "!@#$%^&*()_-+=[]{}|;:,.<>?";
+
+            if (charset === "") {
+                return "Please select at least one character type.";
+            }
+
+            // Generate password using the selected character types
             let password = "";
-            for (let i = 0; i < passwordLength; i++) {
+            for (let i = 0; i < length; i++) {
                 const randomIndex = Math.floor(Math.random() * charset.length);
                 password += charset.charAt(randomIndex);
             }
+
             return password;
         }
 
-        // Update the password input field when the "Go" button is clicked
+        // Update the password input field when the "Generate" button is clicked
         const button = document.querySelector("button");
         button.addEventListener("click", () => {
             const newPassword = generateRandomPassword();
             passwordBox.value = newPassword;
         });
 
-        function copyPassword(){
+        // Update the displayed password length as the slider value changes
+        lengthSlider.addEventListener("input", () => {
+            lengthValue.textContent = lengthSlider.value;
+        });
+
+        function copyPassword() {
             passwordBox.select();
             document.execCommand("copy");
         }
